@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Comentario{% endblock%}
+
+{% block body %}
+    <header>
+        <h1>Comentario</h1>
+    </header>
+    <div>
+        <p>
+            Nombre: {{name}}
+        </p>
+        <p>
+            Email: {{email}}
+        </p>
+        <p>
+            Asunto: {{subject}}
+        </p>
+        <p>
+            Comentario: {{message}}
+        </p>
+    </div>
+{% endblock %}
+    

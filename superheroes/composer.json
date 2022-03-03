@@ -1,0 +1,18 @@
+{
+    "name": "tomas/superheroes",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "tomashm01",
+            "email": "tomashidalgomartin@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/dotenv": "^5.4",
+        "vlucas/phpdotenv": "^5.4"
+    }
+}

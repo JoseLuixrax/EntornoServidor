@@ -1,0 +1,6 @@
+RewriteEngine On
+#No reescribimos index.php si estamos en la carpeta test
+RewriteRule ^(test)($|/) - [L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (.*) index.php

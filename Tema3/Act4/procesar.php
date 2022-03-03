@@ -1,0 +1,11 @@
+<?php
+    $curriculum=array(
+        "nombre"=>$_POST["nombre"],
+        "apellidos"=>$_POST["apellidos"],
+        "edad"=>$_POST["edad"],
+        "pais"=>$_POST["pais"],
+        "lenguaje"=>array($_POST["lenguaje"]),
+        "programar"=>$_POST["programar"]
+    );
+    var_dump($curriculum);
+?>
