@@ -1,10 +1,6 @@
 <?php
 namespace App\Models;
 
-#Importar modelo de abstraccion de base de datos
-// require_once('DBAbstractModel.php');
-
-
 class Contact extends DBAbstractModel {
     /*CONSTRUCCIÓN DEL MODELO SINGLETON*/
     private static $instancia;
