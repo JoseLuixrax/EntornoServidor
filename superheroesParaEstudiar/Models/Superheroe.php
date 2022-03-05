@@ -27,11 +27,6 @@ class Superheroe extends DBAbstractModel{
        
     }
 
-    // public function __construct($nombre,$velocidad) {
-        // $this->nombre=$nombre;
-        // $this->velocidad=$velocidad;
-    // }
-
     public function getId() {
         return $this->id;
     }
@@ -51,6 +46,12 @@ class Superheroe extends DBAbstractModel{
         return $this->rows;
     }
 
+    public function getLastInsert(){
+        $this->query = "SELECT * FROM SuperHeroe ORDER BY id DESC LIMIT 1";
+        $this->get_results_from_query();
+        return $this->rows;
+    }
+
     public function getAll() {
         $this->query = "SELECT * FROM SuperHeroe";
         $this->get_results_from_query();
@@ -61,7 +62,11 @@ class Superheroe extends DBAbstractModel{
         foreach ($data_array as $key => $value) {
             $this->$key = $value;
         }
+        $nombre=$this->nombre;
+        $velocidad=$this->velocidad;
         $this->query="INSERT INTO SuperHeroe VALUES (null, :nombre, :velocidad)";
+        $this->parametros['nombre']=$nombre;
+        $this->parametros['velocidad']=$velocidad;      
         $this->get_results_from_query();
     }
 

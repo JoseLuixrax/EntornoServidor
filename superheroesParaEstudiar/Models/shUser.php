@@ -52,7 +52,15 @@ class shUser extends DBAbstractModel{
     }
 
     public function set($data_array = []){
-        
+        foreach ($data_array as $key => $value) {
+            $this->$key = $value;
+        }
+        $idUser = $this->idUser;
+        $idHeroe = $this->idHeroe;
+        $this->query="INSERT INTO sh_User VALUES (null,:idUser, :idHeroe)";
+        $this->parametros['idUser']=$idUser;
+        $this->parametros['idHeroe']=$idHeroe;
+        $this->get_results_from_query();
     }
 
     public function delete($id=''){

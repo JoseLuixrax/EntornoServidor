@@ -4,7 +4,33 @@ include("./Models/Superheroe.php");
 include("./Models/Usuario.php");
 include("./Models/shUser.php");
 session_start();
+$heroeEncontrado = [];
 
+if(isset($_GET['buscador'])){
+    $sh=new shUser();
+    $sh=$sh->getAllHeroes($_SESSION['id']);
+    foreach($sh as $superheroe){
+        $heroe=new Superheroe();
+        $heroe=$heroe->get($superheroe['idHeroe']);
+        if($heroe[0]['nombre']==$_GET['nombreHeroe']){
+            $heroeEncontrado=$heroe[0];
+        }
+    }
+}
+
+if(isset($_POST['addHeroe'])){
+    $heroe=new Superheroe();
+    $heroe->set(array(
+        "nombre"=>$_POST['nombreHeroe'],
+        "velocidad"=>$_POST['velocidadHeroe']
+    ));
+    $heroeInsertado=$heroe->getLastInsert();
+    $sh=new shUser();
+    $sh->set(array(
+        "idUser"=>$_SESSION['id'],
+        "idHeroe"=>$heroeInsertado[0]['id']
+    ));
+}
 
 ?>
 
@@ -38,6 +64,19 @@ session_start();
         <?php
         
         if(isset($_SESSION['usuario'])){
+
+            echo "<form class='formRegistro' action='misHeroes.php' method='get'>";
+            echo "<input type='text' name='nombreHeroe' placeholder='Buscar'>";
+            echo "<input type='submit' name='buscador' value='Buscar'>";
+            echo "</form>";
+            echo "<br>";
+
+            echo "<form class='formRegistro' action='misHeroes.php' method='post'>";
+            echo "<input type='text' name='nombreHeroe' placeholder='Nombre del superheroe' required>";
+            echo "<input type='number' name='velocidadHeroe' placeholder='Velocidad del superheroe' required>";
+            echo "<input type='submit' name='addHeroe' value='Añadir'>";
+            echo "</form>";
+
             $misHeroes=new shUser();
             $misHeroes=$misHeroes->getAllHeroes($_SESSION['id']);
             if(count($misHeroes)==0){
@@ -64,6 +103,29 @@ session_start();
                     echo "</tr>";
                 }
                 echo "</table>";
+            }
+
+            if(count($heroeEncontrado)!=0){
+                echo "<h2>Heroe encontrado</h2>";
+                echo "<table>";
+                echo "<tr>";
+                echo "<th>ID</th>";
+                echo "<th>Nombre</th>";
+                echo "<th>Velocidad</th>";
+                echo "<th>Editar heroes</th>";
+                echo "<th>Borrar heroes</th>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td>".$heroeEncontrado['id']."</td>";
+                echo "<td>".$heroeEncontrado['nombre']."</td>";
+                echo "<td>".$heroeEncontrado['velocidad']."</td>";
+                echo "<td><a href='editarHeroe.php?id=".$heroeEncontrado['id']."'>Editar</a></td>";
+                echo "<td><a href='borrarHeroe.php?id=".$heroeEncontrado['id']."'>Borrar</a></td>";
+                echo "</tr>";
+                echo "</table>";
+            } else {
+                echo "<h2>Heroe encontrado</h2>";
+                echo "<p>No se ha encontrado el heroe</p>";
             }
         } else {
             echo "<p>No tienes permisos para ver esta página</p>";
