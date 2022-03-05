@@ -1,0 +1,67 @@
+body{
+    overflow-x:hidden;
+}
+
+h1{
+    width: 100%;
+    text-align: center;
+}
+
+nav{
+    display:flex;
+    justify-content: space-around;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+nav a{
+    text-decoration: none;
+    color: #000;
+}
+nav a:hover{
+    color: red;
+}
+table,tbody{
+    width: 100%;
+}
+table tr,table td{
+    text-align: center;
+}
+footer{
+    background-color: #f2f2f2;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.formRegistro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #a07e7e;
+}
+
+.formRegistro label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 10px;
+}
+
+.formRegistro input{
+    width: 10%;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
+
+.formRegistro #submit:hover{
+    background-color: #000000;
+    color: #f2f2f2;
+}

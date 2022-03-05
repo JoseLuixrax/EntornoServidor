@@ -2,6 +2,7 @@
 use PDO;
 use PDOException;
 
+
 abstract class DBAbstractModel
 {
     private static $db_host = DBHOST;
