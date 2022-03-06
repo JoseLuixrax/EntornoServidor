@@ -20,9 +20,11 @@ if(isset($_GET['buscador'])){
 
 if(isset($_POST['addHeroe'])){
     $heroe=new Superheroe();
+    $nombreImagen = $_FILES['imagenHeroe']['name'];
     $heroe->set(array(
         "nombre"=>$_POST['nombreHeroe'],
-        "velocidad"=>$_POST['velocidadHeroe']
+        "velocidad"=>$_POST['velocidadHeroe'],
+        "foto"=>$nombreImagen
     ));
     $heroeInsertado=$heroe->getLastInsert();
     $sh=new shUser();
@@ -30,6 +32,12 @@ if(isset($_POST['addHeroe'])){
         "idUser"=>$_SESSION['id'],
         "idHeroe"=>$heroeInsertado[0]['id']
     ));
+    unset($_POST['addHeroe']);
+    unset($_POST['nombreHeroe']);
+    unset($_POST['velocidadHeroe']);
+    unset($_FILES['imagenHeroe']);
+    header("Location: misHeroes.php");
+    
 }
 
 ?>
@@ -47,7 +55,6 @@ if(isset($_POST['addHeroe'])){
 <h1>Superheroes</h1>
     <nav>
         <?php
-
         if(isset($_SESSION['usuario'])) {
             echo "<a href='home.php'>Home</a>";
             echo "<a href='misHeroes.php'>Mis superheroes</a>";
@@ -74,6 +81,7 @@ if(isset($_POST['addHeroe'])){
             echo "<form class='formRegistro' action='misHeroes.php' method='post'>";
             echo "<input type='text' name='nombreHeroe' placeholder='Nombre del superheroe' required>";
             echo "<input type='number' name='velocidadHeroe' placeholder='Velocidad del superheroe' required>";
+            echo "<input type='file' name='imagenHeroe' required>";
             echo "<input type='submit' name='addHeroe' value='Añadir'>";
             echo "</form>";
 
@@ -87,17 +95,22 @@ if(isset($_POST['addHeroe'])){
                 echo "<th>ID</th>";
                 echo "<th>Nombre</th>";
                 echo "<th>Velocidad</th>";
+                echo "<th>Imagen</th>";
                 echo "<th>Editar heroes</th>";
                 echo "<th>Borrar heroes</th>";
                 echo "</tr>";
+
+                $directorio = $_SERVER['DOCUMENT_ROOT'].'/Servidor/superheroesParaEstudiar/img/';
                 
                 $heroes=new Superheroe();
                 foreach($misHeroes as $heroe){
                     $miHeroe=$heroes->get($heroe['idHeroe']);
+                    $foto="img/".$miHeroe[0]['foto'];
                     echo "<tr>";
                     echo "<td>".$miHeroe[0]['id']."</td>";
                     echo "<td>".$miHeroe[0]['nombre']."</td>";
                     echo "<td>".$miHeroe[0]['velocidad']."</td>";
+                    echo "<td><img src=$foto width='50' height='50'></td>";
                     echo "<td><a href='editarHeroe.php?id=".$miHeroe[0]['id']."'>Editar</a></td>";
                     echo "<td><a href='borrarHeroe.php?id=".$miHeroe[0]['id']."'>Borrar</a></td>";
                     echo "</tr>";
@@ -133,8 +146,5 @@ if(isset($_POST['addHeroe'])){
         ?>
     </main>
 
-    <footer>
-        <p>&copy; 2022 - Tomás Hidalgo</p>
-    </footer>
 </body>
 </html>

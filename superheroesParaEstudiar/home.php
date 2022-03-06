@@ -42,12 +42,14 @@ session_start();
         echo "<th>ID</th>";
         echo "<th>Nombre</th>";
         echo "<th>Velocidad</th>";
+        echo "<th>Imagen</th>";
         echo "</tr>";
         foreach ($sh as $superheroe) {
             echo "<tr>";
             echo "<td>".$superheroe['id']."</td>";
             echo "<td>".$superheroe['nombre']."</td>";
             echo "<td>".$superheroe['velocidad']."</td>";
+            echo "<td><img src='img/".$superheroe['foto']."' width='50' height='50'></td>";
             echo "</tr>";
         }
         echo "</table>";

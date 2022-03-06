@@ -9,7 +9,7 @@ if(isset($_POST['enviar'])){
     $arrayDatos=[
         "id"=>$_POST['id'],
         "nombre"=>$_POST['nombre'],
-        "velocidad"=>$_POST['velocidad']
+        "velocidad"=>$_POST['velocidad'],
     ];
     $updateHeroe->edit($arrayDatos);
 }

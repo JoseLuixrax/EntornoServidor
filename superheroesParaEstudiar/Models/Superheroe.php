@@ -20,6 +20,7 @@ class Superheroe extends DBAbstractModel{
     private $id;
     private $nombre;
     private $velocidad;
+    private $foto;
 
 
     public function __construct()
@@ -64,9 +65,11 @@ class Superheroe extends DBAbstractModel{
         }
         $nombre=$this->nombre;
         $velocidad=$this->velocidad;
-        $this->query="INSERT INTO SuperHeroe VALUES (null, :nombre, :velocidad)";
+        $foto=$this->foto;
+        $this->query="INSERT INTO SuperHeroe VALUES (null, :nombre, :velocidad, :foto)";
         $this->parametros['nombre']=$nombre;
         $this->parametros['velocidad']=$velocidad;      
+        $this->parametros['foto']=$foto;
         $this->get_results_from_query();
     }
 

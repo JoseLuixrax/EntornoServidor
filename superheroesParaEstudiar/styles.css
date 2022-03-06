@@ -28,8 +28,6 @@ table tr,table td{
 }
 footer{
     background-color: #f2f2f2;
-    position: absolute;
-    bottom: 0;
     text-align: center;
     width: 100%;
 }
@@ -53,7 +51,7 @@ footer{
 }
 
 .formRegistro input{
-    width: 10%;
+    width: 40%;
     padding: 10px;
     margin: 10px;
     border: none;
