@@ -1,7 +1,6 @@
 <?php
 require "../bootstrap.php";
 
-use App\Controllers\AuthController;
 use App\Controllers\ContactsController;
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
@@ -18,6 +17,7 @@ $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $request);
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
+
 // User data if exists 
 $userId = null;
 if (isset($uri[2])) {
@@ -25,12 +25,12 @@ if (isset($uri[2])) {
 }
 
 // Proccess login
-if ($request == '/login') {
-    $auth = new AuthController($requestMethod);
-    if (!$auth->loginFromRequest()) {
-        exit(http_response_code(401));
-    }
-}
+// if ($request == '/login') {
+    // $auth = new AuthController($requestMethod);
+    // if (!$auth->loginFromRequest()) {
+        // exit(http_response_code(401));
+    // }
+// }
 
 $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
@@ -57,7 +57,6 @@ if ($uri[1] !== 'contacts') {
 }
 
 $controller = new ContactsController($requestMethod,$userId);
-$controller ->processRequest();
-
+$controller->processRequest();
 
 ?>

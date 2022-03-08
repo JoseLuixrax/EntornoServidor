@@ -40,6 +40,10 @@ class Superheroe extends DBAbstractModel{
         return $this->velocidad;
     }
 
+    public function getFoto() {
+        return $this->foto;
+    }
+
     public function get($id='') {
         $this->query = "SELECT * FROM SuperHeroe where id = :id";
         $this->parametros['id'] = $id;

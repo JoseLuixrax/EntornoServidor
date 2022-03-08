@@ -19,12 +19,12 @@ if(isset($_GET['buscador'])){
 }
 
 if(isset($_POST['addHeroe'])){
+    
     $heroe=new Superheroe();
-    $nombreImagen = $_FILES['imagenHeroe']['name'];
     $heroe->set(array(
         "nombre"=>$_POST['nombreHeroe'],
         "velocidad"=>$_POST['velocidadHeroe'],
-        "foto"=>$nombreImagen
+        "foto"=>$_POST['foto']
     ));
     $heroeInsertado=$heroe->getLastInsert();
     $sh=new shUser();
@@ -32,12 +32,7 @@ if(isset($_POST['addHeroe'])){
         "idUser"=>$_SESSION['id'],
         "idHeroe"=>$heroeInsertado[0]['id']
     ));
-    unset($_POST['addHeroe']);
-    unset($_POST['nombreHeroe']);
-    unset($_POST['velocidadHeroe']);
-    unset($_FILES['imagenHeroe']);
-    header("Location: misHeroes.php");
-    
+    unset($_POST);
 }
 
 ?>
@@ -81,7 +76,7 @@ if(isset($_POST['addHeroe'])){
             echo "<form class='formRegistro' action='misHeroes.php' method='post'>";
             echo "<input type='text' name='nombreHeroe' placeholder='Nombre del superheroe' required>";
             echo "<input type='number' name='velocidadHeroe' placeholder='Velocidad del superheroe' required>";
-            echo "<input type='file' name='imagenHeroe' required>";
+            echo "<input type='file' name='foto' required>";
             echo "<input type='submit' name='addHeroe' value='Añadir'>";
             echo "</form>";
 
@@ -101,7 +96,7 @@ if(isset($_POST['addHeroe'])){
                 echo "</tr>";
 
                 $directorio = $_SERVER['DOCUMENT_ROOT'].'/Servidor/superheroesParaEstudiar/img/';
-                
+
                 $heroes=new Superheroe();
                 foreach($misHeroes as $heroe){
                     $miHeroe=$heroes->get($heroe['idHeroe']);

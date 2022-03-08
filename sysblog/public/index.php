@@ -62,27 +62,27 @@ $map = $routerContainer->getMap();
 
 // Añadir una ruta al mapa, y manejarse por ella
 
-$map->get('index', 'sysblog/index.php', [
+$map->get('index', '/', [
     'controller' => 'App\Controllers\IndexController',
     'action' => 'indexAction'
 ]);
 
-$map->get('about', 'sysblog/about', [
+$map->get('about', '/about', [
     'controller' => 'App\Controllers\PageController',
     'action' => 'aboutAction'
 ]);
 
-$map->get('contact', 'sysblog/contact', [
+$map->get('contact', '/contact', [
     'controller' => 'App\Controllers\PageController',
     'action' => 'contactAction'
 ]);
 
-$map->post('contactSend', 'sysblog/contact', [
+$map->post('contactSend', '/contact', [
     'controller' => 'App\Controllers\PageController',
     'action' => 'contactActionSend'
 ]);
 
-$map->get('blog', 'sysblog/blog/{id}', [
+$map->get('blog', '/blog/{id}', [
     'controller' => 'App\Controllers\BlogController',
     'action' => 'showBlogAction'
 ])->tokens(['id'=>'\d+']); 

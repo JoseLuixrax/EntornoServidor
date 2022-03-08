@@ -34,7 +34,7 @@ class Contact extends DBAbstractModel {
         foreach ($user_data as $campo=>$value) {
             $$campo = $value;
         }
-        $this->query = "INSERT INTO contacts(name, tlf, mail) VALUES(:name, :tlf, :mail)";
+        $this->query = "INSERT INTO contacts VALUES(:name, :tlf, :mail)";
         $this->parametros['name']= $name;
         $this->parametros['tlf']= $tlf;
         $this->parametros['mail']= $mail;
@@ -46,7 +46,7 @@ class Contact extends DBAbstractModel {
         foreach ($user_data as $campo=>$value) {
             $$campo = $value;
         }
-        $this->query = "UPDATE contacts SET name= :name, tlf= :tlf, mail= :mail, updated_at = CURRENT_TIMESTAMP WHERE id= :id";
+        $this->query = "UPDATE contacts SET nombre= :name, telefono= :tlf, email= :mail, updated_at = CURRENT_TIMESTAMP WHERE id= :id";
         $this->parametros['name']= $name;
         $this->parametros['tlf']= $tlf;
         $this->parametros['mail']= $mail;
